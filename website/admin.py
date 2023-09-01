@@ -8,6 +8,7 @@ from .models import *
 from . import db
 from flask_mail import Message,Mail
 from sqlalchemy import desc
+from flask_login import UserMixin, current_user
 
 admin = Blueprint('admin',__name__)
 
@@ -51,12 +52,18 @@ def register():
 @admin.route('/dashboard')
 @login_required
 def dashboard():
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     return redirect('/plhrofories')
 
 
 @admin.route('/synergeio', methods=['POST','GET'])
 @login_required
 def synergeio():
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     if request.method == 'POST':
         user = request.form.get('user')
         email = request.form.get('email')
@@ -105,12 +112,18 @@ def synergeio():
 @admin.route('/visit_link/<int:a>')
 @login_required
 def visit_link(a):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     f = MAIN_database.query.get_or_404(a)
     return render_template('update_table.html',m=f)
 
 @admin.route('/update/<int:id>', methods=['POST','GET'])
 @login_required
 def update(id):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     user_to_update = Users_database.query.get_or_404(id)
     print(user_to_update)
     if request.method == 'POST':
@@ -128,6 +141,9 @@ def update(id):
 @admin.route('/delete/<int:id>')
 @login_required
 def delete(id):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     user_to_delete = Users_database.query.get_or_404(id)
     try:
         db.session.delete(user_to_delete)
@@ -140,6 +156,9 @@ def delete(id):
 @admin.route('/plhrofories', methods=['POST','GET'])
 @login_required
 def plhrofories():
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     if request.method == 'POST':
         search = request.form.get('search')
         '''m = MAIN_database.query.all()
@@ -160,6 +179,9 @@ def plhrofories():
 @admin.route('/users', methods=['POST','GET'])
 @login_required
 def users():
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     if request.method == 'POST':
         date = request.form.get('date')
         visit_date = request.form.get('visit_date')
@@ -221,6 +243,9 @@ def users():
 @admin.route('/download/<string:filename>')
 @login_required
 def download(filename):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     upload = MAIN_database.query.filter_by(filename=filename).first()
     print(upload)
     return send_file(BytesIO(upload.data), download_name=upload.filename, as_attachment=True)
@@ -228,6 +253,9 @@ def download(filename):
 @admin.route('/delete_history/<int:id>')
 @login_required
 def delete_history(id):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     del_form = MAIN_database.query.get_or_404(id)
     try:
         db.session.delete(del_form)
@@ -240,6 +268,9 @@ def delete_history(id):
 @admin.route('/select', methods=['POST','GET'])
 @login_required
 def select():
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     if request.method == 'POST':
         couples=[]
         syn = request.form.get('synergeio')
@@ -269,10 +300,15 @@ def select():
         return render_template('plhrofories.html',m=m,u=u[1:])
     else:
         return redirect('/plhrofories')
+    
+# file actions------------------------------------------------------------------------------------
 
 @admin.route('/pdf', methods=['POST','GET'])
 @login_required
 def pdf():
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     if request.method == "POST":
         image = request.files.get('pdf_file')
         file_description = request.form.get('file_description')
@@ -290,6 +326,9 @@ def pdf():
 @admin.route('/download_pdf/<string:filename>')
 @login_required
 def download_pdf(filename):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     upload = Files_database.query.filter_by(filename=filename).first()
     print(upload)
     return send_file(BytesIO(upload.data), download_name=upload.filename, as_attachment=True)
@@ -297,6 +336,9 @@ def download_pdf(filename):
 @admin.route('/make_public/<string:filename>')
 @login_required
 def make_public(filename):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     upload = Files_database.query.filter_by(filename=filename).first()
     upload.status = "public"
     db.session.commit()
@@ -306,6 +348,9 @@ def make_public(filename):
 @admin.route('/make_private/<string:filename>')
 @login_required
 def make_private(filename):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     upload = Files_database.query.filter_by(filename=filename).first()
     upload.status = "private"
     db.session.commit()
@@ -315,6 +360,9 @@ def make_private(filename):
 @admin.route('/del_pdf/<string:filename>')
 @login_required
 def del_pdf(filename):
+    print(current_user)
+    if current_user.user != 'admin':
+        return render_template('index.html')
     upload = Files_database.query.filter_by(filename=filename).first()
     db.session.delete(upload)
     db.session.commit()
