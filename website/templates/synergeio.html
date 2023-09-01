@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+{%block title%} Synergeio {%endblock%}
+{%block content%}
+<meta name="synergeio" content="no index, nofollow"> 
+<link rel="stylesheet" href="../static/style.css" />
+<body>
+    <form action="/synergeio" method="POST">
+        <div class="container" >
+            <label style="color: white;"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="user" required>
+            <br>
+            <label style="color: white;"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+            <br>
+            <label style="color: white;"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <br>
+            <button type="submit" style="border-radius: 15px; color: white; margin-top: 30px; border: 2px solid white;" class="add">ADD user</button>
+        </div>
+    </form>
+    <br>
+    <table  id="insidetable" class="tableSection" style="overflow-x:auto;">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Tasks</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for user_to_update in users%}
+            <tr>
+                <td>{{user_to_update.user}} </td>
+                <!--<td>{{user_to_update.douleies}}</td>-->
+                {% if user_to_update.douleies != "None" %}
+                <td>{% for a in user_to_update.douleies.split(',') %}
+                        <a href="/visit_link/{{a}}" style="color: white;" target="_blank">{{a}}</a>&nbsp;
+                    {%endfor%}
+                </td>
+                {% else %}
+                    <td>{{user_to_update.douleies}}</td>
+                {% endif %}
+                <td><a href="/update/{{user_to_update.id}}" class="btn btn-outline-light btn-sm">Update</a></td>
+                <td><a href="/delete/{{user_to_update.id}}" class="btn btn-outline-light btn-sm"  onclick ="return confirm('Είσαι σίγουρος ότι θες να διαγράψεις αυτό το άτομο?')">Delete</a></td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+</body>
+<style>
+    .add:hover{
+        background-position: left;
+        background-image: linear-gradient(to left, #091291, #172da5, #f50000);
+        color: white;
+    }
+
+</style>
+{%endblock%}

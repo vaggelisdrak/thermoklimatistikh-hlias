@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+{%block title%} Pdf_upload {%endblock%}
+{%block content%}
+<link rel="stylesheet" href="../static/style.css" />
+</head>
+<body>
+    <form class="modal-content animate" enctype=multipart/form-data action="/pdf" method="POST">
+        <div class="container">
+            
+            <br>
+            <!--<label><b>PDF</b></label>-->
+            <input type="file" placeholder="Upload photo" name="pdf_file" required style="margin-bottom: 5%;">
+            <br>
+            <button type="submit" style="border-radius: 15px;">Upload</button>
+        </div>
+    </form>
+    <br>
+    <table  id="insidetable" class="tableSection" >
+        <thead>
+            <tr>
+                <th>view file</th>
+                <th colspan="2">status</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for file in f%}
+            <tr>
+                <td><a href="/download_pdf/{{file.filename}}" style="color: white;">{{file.filename}}</a></td>
+                <td {% if file.status == "public" %} 
+                style="background-color: white;" {% endif %}>
+                    <a href="/make_public/{{file.filename}}"><img src="../static/unlock.PNG" width="25" height="25"> </a></td>
+                <td {% if file.status == "private" %} 
+                style="background-color: white;"{% endif %}>
+                    <a href="/make_private/{{file.filename}}"><img src="../static/lock.PNG" width="25" height="25"></a></td>
+                <td><a href="/del_pdf/{{file.filename}}" onclick ="return confirm('Είσαι σίγουρος ότι θες να διαγράψεις αυτό το αρχείο?')"><img src="../static/trash.png" width="35" height="35"> </a></td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    <br>
+</body>
+{%endblock%}

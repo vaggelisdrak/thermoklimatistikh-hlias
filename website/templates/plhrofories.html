@@ -1,0 +1,133 @@
+{% extends 'base.html'%}
+{%block title%} Plhrofories {%endblock%}
+{%block content%}
+<link rel="stylesheet" href="../static/style.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+<body>
+  <div class="containerr d-flex justify-content-center">
+    <div class="card mt-5 p-4">
+        <form action="/plhrofories" method="POST">
+        <div class="input-group mb-3"> <input type="text" class="form-control" style="margin-top: 15.5px;" placeholder="Search..." name="search" value="{{s}}">
+            <div class="input-group-append"><button class="btn btn-primary"><i class="fas fa-search"></i></button></div>
+        </form>
+        </div> {% if l %}<span class="text mb-4"> {{l}} records were found from '{{s}}'</span>{% endif %}
+        {% for i in m %}
+    <div class="accordion js-accordion">
+        <div class="accordion__item js-accordion-item">
+          <div class="accordion-header js-accordion-header">RECORD {{i.id}} - {{i.first_last_name}}</div> 
+        <div class="accordion-body js-accordion-body" style="overflow: auto; padding: 0;">
+          <div class="accordion-body__contents" style="overflow: visible;">
+            <table  id="insidetable" class="tableSection" style="font-size: small; overflow: visible;">
+                <tbody style="overflow: visible;">
+                        <tr>   <th>RECORD</th>   <td name="num">{{i.id}}</td>  <td style="text-align: center;"><a href="/delete_history/{{i.id}}" style="border: 1px solid red; padding: 3px; text-decoration: none; color: red; text-align: center;">X</a></td></tr>
+                        <tr>   <th>date</th>   <td colspan="2">{{i.date}}</td>   </tr>
+                        <tr>   <th>visit_date</th>   <td colspan="2">{{i.visit_date}}</td>    </tr>
+                        <tr>   <th>first_last_name</th>  <td colspan="2">{{i.first_last_name}}</td>  </tr>
+                        <tr>   <th>phone_number</th>    <td colspan="2">{{i.phone_number}}</td>  </tr>
+                        <tr>   <th>address</th>     <td colspan="2">{{i.address}} </td>  </tr>
+                        <tr>   <th>device </th>   <td colspan="2">{{i.device}} </td></tr>
+                        <tr>   <th>model</th>   <td colspan="2">{{i.model}} </td></tr>
+                        <tr>   <th>serial_number </th>   <td colspan="2">{{i.serial_number}} </td></tr>
+                        <tr>   <th>guarantee </th>   <td colspan="2">{{i.guarantee}} </td></tr>
+                        <tr>   <th>receipt </th>    <td colspan="2">{{i.receipt}} </td></tr>
+                        <tr>   <th>spare </th>    <td colspan="2">{{i.spare}} </td></tr>
+                        <tr>   <th>order_number </th>   <td colspan="2">{{i.order_number}} </td></tr>
+                        <tr>   <th>order_date </th>   <td colspan="2">{{i.order_date}} </td></tr>
+                        <tr>   <th>model_code </th>    <td colspan="2">{{i.model_code}} </td></tr>
+                        <tr>   <th>model_description </th> <td colspan="2">{{i.model_description}} </td></tr>
+                        <tr>   <th>quantity</th>    <td colspan="2">{{i.quantity}} </td></tr>
+                        <tr>   <th>image</th>    <td colspan="2">   <a href="/download/{{i.filename}}">view image</a> </td></tr>
+                        <tr>   <th>problem_description </th>    <td colspan="2">{{i.problem_description}} </td></tr>
+                        {% set l='' %}
+                        {% for s in u %}
+                          {% if (i.id|string) in s.douleies %}
+                            <tr>   <th>Υπεύθυνα συνεργεία </th>    <td colspan="2">{{s.user}}</td></tr>
+                          {% endif %}
+                        {% endfor %}
+                        <tr>
+                            <form action="/select" method="POST">
+                                <th><label for="synergeio">Διάλεξε συνεργείο</label></th>
+                                <td colspan="2"><select name="synergeio" id="synergeio">
+                                    {%for l in u%}
+                                        <option value="{{l.user,i.id}}">{{l.user}}</option>
+                                    {%endfor%}
+                                </select>
+                                {%if disable %}
+                                    <button type="submit" disabled="True" style="background-color: darkgray;">Submit</button></td>
+                                {% else %}
+                                    <button type="submit">Submit</button></td>
+                                {% endif %}
+                        </form>
+                        <tr style="margin-top: 6%;"></tr> 
+                </tbody>
+            </table>
+          </div>
+          </div><!-- end of accordion body -->
+        </div><!-- end of accordion item -->
+        {% endfor %}
+    </div>
+</div>
+</body>
+<style>
+  th, td {
+    border: 1px solid red;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    padding: 8px;
+  }
+</style>
+<script>
+    var accordion = (function(){
+  
+  var $accordion = $('.js-accordion');
+  var $accordion_header = $accordion.find('.js-accordion-header');
+  var $accordion_item = $('.js-accordion-item');
+ 
+  // default settings 
+  var settings = {
+    // animation speed
+    speed: 400,
+    
+    // close all other accordion items if true
+    oneOpen: false
+  };
+    
+  return {
+    // pass configurable object literal
+    init: function($settings) {
+      $accordion_header.on('click', function() {
+        accordion.toggle($(this));
+      });
+      
+      $.extend(settings, $settings); 
+      
+      // ensure only one accordion is active if oneOpen is true
+      if(settings.oneOpen && $('.js-accordion-item.active').length > 1) {
+        $('.js-accordion-item.active:not(:first)').removeClass('active');
+      }
+      
+      // reveal the active accordion bodies
+      $('.js-accordion-item.active').find('> .js-accordion-body').show();
+    },
+    toggle: function($this) {
+            
+      if(settings.oneOpen && $this[0] != $this.closest('.js-accordion').find('> .js-accordion-item.active > .js-accordion-header')[0]) {
+        $this.closest('.js-accordion')
+               .find('> .js-accordion-item') 
+               .removeClass('active')
+               .find('.js-accordion-body')
+               .slideUp()
+      }
+      
+      // show/hide the clicked accordion item
+      $this.closest('.js-accordion-item').toggleClass('active');
+      $this.next().stop().slideToggle(settings.speed);
+    }
+  }
+})();
+
+$(document).ready(function(){
+  accordion.init({ speed: 300, oneOpen: true });
+});
+</script>
+{%endblock%}

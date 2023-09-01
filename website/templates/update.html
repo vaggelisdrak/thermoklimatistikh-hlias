@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{%block title%} Update user {%endblock%}
+{%block content%}
+<link rel="stylesheet" href="../static/style.css" />
+<body>
+    <form class="modal-content animate" action="/update/{{user_to_update.id}}" method="POST" style="padding: 20px;">
+        <input type="text" placeholder="Update Username" name="user" value="{{user_to_update.user}}">
+        <br>
+        <input type="password" placeholder="Update Password" name="password" value="{{user_to_update.password}}">
+        <br>
+        <input type="text" placeholder="Update jobs" name="jobs" value="{{user_to_update.douleies}}">
+        <br>
+        <button type="submit" value="update_name" class="btn btn-secondary" style="background-color: darkblue; border-radius: 15px;">UPDATE user</button>
+    </form>
+</body>
+{%endblock%}

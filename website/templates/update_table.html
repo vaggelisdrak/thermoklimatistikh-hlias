@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Forma</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <form class="modal-content animate" enctype=multipart/form-data action="/users" method="POST">
+        <div class="container">
+            <label><b>date</b></label>
+            <input type="date" placeholder="Enter date" name="date" value="{{m.date}}" required>
+
+            <label><b>visit_date</b></label>
+            <input type="date" placeholder="Enter visit date" name="visit_date" value="{{m.visit_date}}" required>
+
+            <br>
+            <label><b>name</b></label>
+            <input type="text" placeholder="Enter full name" name="first_last_name"  value="{{m.first_last_name}}" required>
+
+            <label><b>phone number</b></label>
+            <input type="text" placeholder="Enter phone number" name="phone_number" value="{{m.phone_number}}" required>
+
+            <label><b>address</b></label>
+            <input type="text" placeholder="Enter address" name="address" value="{{m.address}}" required>
+
+            <label><b>device</b></label>
+            <input type="text" placeholder="Enter device" name="device" value="{{m.device}}" required>
+
+            <label><b>model</b></label>
+            <input type="text" placeholder="Enter model" name="model" value="{{m.model}}" required>
+
+            <label><b>serial number</b></label>
+            <input type="text" placeholder="Enter serial_number" name="serial_number" value="{{m.serial_number}}" required>
+
+            <label><b>guarantee</b></label>
+            <input type="checkbox" name="guarantee" value="{{m.guarantee}}" >
+
+            <label><b>receipt</b></label>
+            <input type="checkbox"  name="receipt" value="{{m.receipt}}" >
+
+            <label><b>spare</b></label>
+            <input type="checkbox"  name="spare" value="{{m.spare}}">
+
+            <br>
+            <label><b>order number</b></label>
+            <input type="text" placeholder="Enter order number" name="order_number" value="{{m.order_number}}" required>
+
+            <label><b>order date</b></label>
+            <input type="date" placeholder="Enter order date" name="order_date" value="{{m.order_date}}" required>
+
+            <br>
+            <label><b>model code</b></label>
+            <input type="text" placeholder="Enter model code" name="model_code" value="{{m.model_code}}" required>
+
+            <label><b>model description</b></label>
+            <input type="text" placeholder="Enter model_description" name="model_description" value="{{m.model_description}}" required>
+
+            <label><b>quantity</b></label>
+            <input type="number" name="quantity" value="{{m.quantity}}" required>
+
+            <br>
+            <label><b>change image</b></label>
+            <input type="file" placeholder="Upload photo" name="problem_image">
+            <a href="/download/{{m.filename}}">view image</a>
+            <br>
+            <label><b>problem description</b></label>
+            <input type="text" placeholder="Enter problem description" name="problem_description"  value="{{m.problem_description}}"required>
+
+            <button type="submit">Update</button>
+        </div>
+    </form>
+    {% if message %}
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </symbol>
+        </svg>
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+          {{message}}
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="margin-left: auto;"></button>
+    {% endif %}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</html>

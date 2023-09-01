@@ -1,0 +1,377 @@
+/*body{
+    background-image: linear-gradient(to right, #091291, #172da5, #a50707);
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position:center;
+}*/
+
+body{
+	background-image: linear-gradient(to right, #091291, #172da5, #a50707);
+	background-size:contain;
+	background-position:center;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*assign full width inputs*/
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+/*set a style for the buttons*/
+button {
+    display: block;
+    width: 100%;
+    height: 50px;
+    outline: none;
+    border: none;
+    /*background-image: linear-gradient(to right, #091291, #172da5, #f50000);*/
+    background-size: 200%;
+    font-size: 1.2rem;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    cursor: pointer;
+    transition: .5s;
+    box-shadow: 15px 30px 30px rgba(0,0,0,0.32);
+    border-radius: 15px solid white;
+    background-color: #091291;
+}
+
+.alert{
+    margin: 1% auto;
+    width: 69%;
+}
+
+/* set a hover effect for the button*/
+button:hover {
+    opacity: 0.8;
+}
+
+/*set extra style for the cancel button*/
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+/*centre the display image inside the container*/
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+/*set image properties*/
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+/*set padding to the container*/
+.container {
+    margin-top: 20px;
+    border: 2px solid white;
+    border-radius: 15px;
+    padding: 20px;
+}
+    
+/*set the forgot password text*/
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/*set the Modal background*/
+.modal {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 90%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 70px;
+    margin: 20%;
+}
+
+/*style the model content box*/
+.modal-content {
+    margin: 2% auto 2% auto;
+    width: 50%;
+}
+
+/*style the close button*/
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+    
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* add zoom animation*/
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 0;
+    width: 50%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    border: 1px solid red;
+    color: white;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(both){background-color: #f2f2f2}
+
+ 
+  #notification {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+  }
+  
+  #notification:hover {
+    background: red;
+  }
+  
+  #notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+    
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap');
+
+.card {
+    width: 600px;
+    border: none;
+    border-radius: 20px
+}
+
+.form-control {
+    height: 50px;
+    border-radius: 7px;
+    border: 1.5px solid #E3E6ED;
+}
+
+input.form-control:focus {
+    box-shadow: none;
+    border: 1.5px solid #E3E6ED;
+    background-color: #F7F8FD;
+    letter-spacing: 1px
+}
+
+.btn-primary {
+    background-color: red!important;
+    border-radius: 7px;
+    margin-bottom: 5px;
+}
+
+.btn-primary:focus {
+    box-shadow: none
+}
+
+.text {
+    font-size: 13px;
+    color: #9CA1A4
+}
+
+.price {
+    background: #F5F8FD;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 97px
+}
+
+.flex-row {
+    border: 1px solid #F2F2F4;
+    border-radius: 10px;
+    margin: 0 1px 0
+}
+
+.flex-column p {
+    font-size: 14px
+}
+
+span.mb-2 {
+    font-size: 12px;
+    color: #8896BD
+}
+
+h5 span {
+    color: #869099
+}
+
+@media screen and (max-width: 450px) {
+    .card {
+        display: flex;
+        justify-content: center;
+        text-align: center
+    }
+
+    .price {
+        border: none;
+        margin: 0 auto
+    }
+        /*style the model content box*/
+    .modal-content {
+        margin: 2% auto 2% auto;
+        width: 100%;
+    }
+
+}
+
+
+.accordion {
+    font-size: 1rem;
+    width: 30vw;
+    margin: 0 auto;
+    border-radius: 15px;
+    margin-top: 20px;
+  }
+  
+  .accordion-header,
+  .accordion-body {
+    background: white;
+  }
+  
+  .accordion-header {
+    padding: 1.5em 1.5em;
+    background:  #091291;
+    border: 2px solid white;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    font-size: .7em;
+    letter-spacing: .1em;
+    transition: all .3s;
+    text-transform: uppercase;
+    margin: 5px;
+  }
+  
+  .accordion__item {
+      border-bottom: 1px solid #102799;
+  }
+  
+  .accordion__item .accordion__item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  
+  .accordion-header:hover {
+    background: linear-gradient(to right, #091291, #172da5, #a50707);
+    position: relative;
+    z-index: 5;
+  }
+  
+  .accordion-body {
+    background: #fcfcfc;
+    color: #353535;
+    display: none;
+    border-radius: 15px;
+  }
+  
+  .accordion-body__contents {
+    padding: 1.5em 1.5em;
+    font-size: .85em;
+  }
+  
+  .accordion__item.active:last-child .accordion-header {
+    border-radius: none;
+  }
+  
+  .accordion:first-child > .accordion__item > .accordion-header {
+    border-bottom: 1px solid transparent;
+  }
+  
+  .accordion__item > .accordion-header:after {
+    content: "\f3d0";
+    font-family: IonIcons;
+    font-size: 1.2em;
+    float: right;
+    position: relative;
+    top: -2px;
+    transition: .3s all;
+    transform: rotate(0deg);
+  }
+  
+  .accordion__item.active > .accordion-header:after {
+    transform: rotate(-180deg);
+  }
+  
+  .accordion__item.active .accordion-header {
+    background: #2D3D99;
+  }
+  
+  .accordion__item .accordion__item .accordion-header {
+    background: #f1f1f1;
+    color: #353535;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    body {
+      padding: 1em;
+    }
+    
+    .accordion {
+      width: 100%;
+    }
+  }
+  
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
